@@ -37,7 +37,8 @@ for i in path:
     img_data = np.expand_dims(img_data, axis=0)
     img_data = preprocess_input(img_data)
     vgg19_feature = model_extractfeatures.predict(img_data)
-    
+    allfeature.append(vgg19_feature)
+
     
     
     
