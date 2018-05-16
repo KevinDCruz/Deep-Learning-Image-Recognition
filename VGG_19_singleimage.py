@@ -26,7 +26,7 @@ from PIL import Image
 
 model = VGG19(weights='imagenet')#, include_top=True)
 model.summary()
-model_extractfeatures = Model(input=model.input, output=model.get_layer('fc1').output)
+model_extractfeatures = Model(input=model.input, output=model.get_layer('fc6').output)
 
 
 img_path = "C:/Users/Kevin D'Cruz/Keras_Image_Classification/train/cat.0.jpg"
