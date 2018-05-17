@@ -26,8 +26,9 @@ for dirName, subdirList, fileList in os.walk(rootDir):
         #print('\t%s' % fname)
 
 allfeature = []
-    
-for i in path:
+kl=path[10001:25000]    
+
+for i in kl:
     print(i)
     img = image.load_img(i, target_size=(224, 224))
     img_data = image.img_to_array(img)
@@ -35,51 +36,23 @@ for i in path:
     img_data = preprocess_input(img_data)
     vgg19_feature = model_extractfeatures.predict(img_data)
     allfeature.append(vgg19_feature)
-    #allfeature
-    allfeature_list_np = np.array(allfeature)
-    allfeature_list_np
-
-
-fw = open("all_features.txt",'w')
-for feature in allfeature:
-    fw.write(str(feature))
+    #
     
-fr = open('all_features.txt', 'r')
-print(fr.read())
-
-fr.close()
-
-type(allfeature_list_np)
-
-import numpy as np
-np.savetxt("all_features.csv", allfeature_list_np, delimiter=",")
-
-
+#Creating DF and appending the features
 import pandas as pd
-df = pd.DataFrame(allfeature)
+allfeature_list_np = np.array(allfeature)
+abc = pd.DataFrame([])
+for fea in allfeature_list_np:
+    fea
+    abc = abc.append(pd.DataFrame((fea)))
 
-df[0].str.strip('[[]]')
-df
 
-df.str.get(0)
-#np.savetxt(r'all_features.txt', allfeature_list_np.values, fmt='%d')
-df.to_csv("all_features.csv", index=False, sep='\t', encoding='utf-8')
-    
+#Saving file to csv
+abc.to_csv('VGG19features3.csv', sep = ",")
 
-with open("all_features.csv", "wb") as f:
-        writer = csv.writer(f, delimiter=',')
-        writer.writerows(allfeature)
 
-    
-with open("all features.txt", 'r') as file:
-    allfeature = [line.rstrip('\n') for line in file]
 
-print(allfeature)    
-    #k = np.squeeze(vgg16_feature)
-    
-    
-import csv
 
-with open('all_features2.csv', 'wb') as myfile:
-    wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
-    wr.writerow(allfeature)   
+datapath = pd.DataFrame((path))
+datapath.to_csv('path.csv', sep=",")
+

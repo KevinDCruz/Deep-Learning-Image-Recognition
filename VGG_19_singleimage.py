@@ -24,9 +24,9 @@ from IPython.display import display
 from PIL import Image
 
 
-model = VGG19(weights='imagenet')#, include_top=True)
+model = VGG19(weights='imagenet')  # , include_top=True)
 model.summary()
-model_extractfeatures = Model(input=model.input, output=model.get_layer('fc6').output)
+model_extractfeatures = Model(input=model.input, output=model.get_layer('fc1').output)
 
 
 img_path = "C:/Users/Kevin D'Cruz/Keras_Image_Classification/train/cat.0.jpg"
@@ -37,6 +37,3 @@ img_data = np.expand_dims(img_data, axis=0)
 img_data = preprocess_input(img_data)
 
 vgg19_features = model_extractfeatures.predict(img_data)
-
-
-
